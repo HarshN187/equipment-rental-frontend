@@ -1,4 +1,3 @@
-import React from "react";
 import FormAction from "../../../components/Form/FormAction";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,12 +8,6 @@ import { userApi } from "../../../api";
 import { useNavigate } from "react-router-dom";
 
 const fields = addUserFields;
-
-interface AddUserFormData {
-  username: string;
-  email: string;
-  phone: string;
-}
 
 function AddUserForm() {
   const {
@@ -27,10 +20,9 @@ function AddUserForm() {
   });
   const navigate = useNavigate();
   const onSubmit = async (data: UserData) => {
-    // console.log(data);
     try {
       const response = await userApi.post(data);
-      //   console.log(response);
+
       navigate("/users");
     } catch (e) {
       alert(e);

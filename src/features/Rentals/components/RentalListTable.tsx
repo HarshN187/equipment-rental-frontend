@@ -1,15 +1,17 @@
-import { useEffect, useState, type JSX } from "react";
+import { useState, type JSX } from "react";
 import { rentalApi } from "../../../api";
 import { MyTable } from "../../../components";
-import { formatDateHTML } from "../../../utils/formateDate";
 import { EditRentalModal } from "./EditRentalModal";
 import type { RentalData } from "../../../types/rentals.types";
 import { Bounce, toast } from "react-toastify";
+import { useGetRentals } from "../hooks/useGetRentals";
+import { useUpdateRental } from "../hooks/useUpdateRental";
 
 function RentalListTable(): JSX.Element {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRental, setSelectedRental] = useState<any>();
+  const { data, isLoading, isError, error, refetch } = useGetRentals();
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -17,60 +19,19 @@ function RentalListTable(): JSX.Element {
   };
 
   const handleEditClick = async (rental: RentalData) => {
-    // console.log(rental);
     const rentalData = await rentalApi.getOne({ id: Number(rental.id) });
 
     setSelectedRental(rentalData.data);
     setIsModalOpen(true);
   };
 
-  const handleSave = async (updatedRental: RentalData) => {
-    console.log(updatedRental);
+  
 
-    try {
-      const response = await rentalApi.patch(updatedRental);
-      console.log(response);
-    } catch (e) {
-      toast.error("Error during updating Rental!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-    }
-    alert("submitted");
-    setIsModalOpen(false);
-    setSelectedRental(null);
-  };
-
-  const fetchData = async () => {
-    try {
-      const response = await rentalApi.getAll();
-
-      const mappedData = response.data.map((ele, index: number) => {
-        return {
-          e_id: index + 1,
-          id: ele.id,
-          customer: ele.user.name,
-          equipment: ele.equipment.name,
-          quantity: ele.quantity,
-          start_date: formatDateHTML(ele.start_date),
-          end_date: formatDateHTML(ele.end_date),
-          payment_status: ele.payment_status,
-          status: ele.status,
-        };
-      });
-
-      setData(mappedData);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const updateMutation = useUpdateRental(
+    setSelectedRental,
+    setIsModalOpen,
+    refetch
+  );
 
   const columns = [
     { field: "e_id", header: "ID" },
@@ -96,10 +57,6 @@ function RentalListTable(): JSX.Element {
     },
   ];
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const rowClass = () => {
     return "py-2 text-lg my-2 hover:bg-gray-100 cursor-pointer";
   };
@@ -113,7 +70,7 @@ function RentalListTable(): JSX.Element {
         <EditRentalModal
           rental={selectedRental}
           onClose={handleCloseModal}
-          onSave={handleSave}
+          onSave={updateMutation}
         />
       )}
     </>

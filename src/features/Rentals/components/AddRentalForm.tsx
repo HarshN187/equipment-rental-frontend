@@ -8,6 +8,8 @@ import { Input } from "../../../components/Form/Input";
 import FormAction from "../../../components/Form/FormAction";
 import { useNavigate } from "react-router-dom";
 import { Flip, toast } from "react-toastify";
+import { useGetDropDownData } from "../hooks/useGetDropDownData";
+import { useCreateRental } from "../hooks/useCreateRental";
 
 interface DropdownOption {
   value: number | string;
@@ -29,7 +31,6 @@ function AddRentalForm() {
   const navigate = useNavigate();
 
   const onsubmit = async (data: RentalData) => {
-    console.log("Form data submitted:", data);
     try {
       const response = await rentalApi.post(data);
 
@@ -51,34 +52,9 @@ function AddRentalForm() {
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const allUserData = await userApi.getAll();
-      const allEquipmentData = await equipmentApi.getAll();
+  const createMutation = useCreateRental();
 
-      const mappedUserData: DropdownOption[] = allUserData.data.map((data) => ({
-        value: data.user_id,
-        label: data.name,
-      }));
-
-      const mappedEquipData: DropdownOption[] = allEquipmentData.data.map(
-        (data) => ({
-          value: data.e_id,
-          label: data.name,
-        })
-      );
-
-      setUserData(mappedUserData);
-      setEquipData(mappedEquipData);
-    } catch (e) {
-      console.error("Error fetching data:", e);
-      alert("Failed to load user or equipment data. Please try again.");
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useGetDropDownData(setUserData, setEquipData);
 
   return (
     <div className="w-full max-w-2xl transform overflow-x-auto rounded-xl bg-white p-6 shadow-2xl hover:shadow-3xl border border-gray-200">

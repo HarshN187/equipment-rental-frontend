@@ -30,7 +30,6 @@ export function AddAddressForm() {
   const fetchUser = async () => {
     try {
       const response = await userApi.getAll();
-
       const data = response.data.map((data) => {
         return {
           value: data.user_id,

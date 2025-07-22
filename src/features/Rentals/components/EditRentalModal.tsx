@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import { formatDateHTML } from "../../../utils/formateDate";
 import { equipmentApi, userApi } from "../../../api";
 import FormModal from "../../../components/Form/FormModal";
+import { useGetDropDownData } from "../hooks/useGetDropDownData";
 
 interface EditRentalModalProps {
   rental: RentalData;
   onClose: () => void;
-  onSave: (updatedData: RentalData) => void;
+  onSave: any;
 }
 
 interface DropdownOption {
@@ -56,42 +57,13 @@ export function EditRentalModal({
   const [userData, setUserData] = useState<DropdownOption[]>([]);
   const [equipData, setEquipData] = useState<DropdownOption[]>([]);
 
-  const fetchData = async () => {
-    try {
-      const allUserData = await userApi.getAll();
-      const allEquipmentData = await equipmentApi.getAll();
-
-      const mappedUserData: DropdownOption[] = allUserData.data.map((data) => ({
-        value: data.user_id,
-        label: data.name,
-      }));
-
-      const mappedEquipData: DropdownOption[] = allEquipmentData.data.map(
-        (data) => ({
-          value: data.e_id,
-          label: data.name,
-        })
-      );
-
-      setUserData(mappedUserData);
-      setEquipData(mappedEquipData);
-    } catch (e) {
-      console.error("Error fetching data:", e);
-      alert("Failed to load user or equipment data. Please try again.");
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useGetDropDownData(setUserData, setEquipData);
 
   return (
-    // <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center z-50">
-    //   <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
     <>
       <FormModal>
         <h2 className="text-xl font-bold mb-4">Edit Rental</h2>
-        <form onSubmit={handleSubmit(onSave)}>
+        <form onSubmit={handleSubmit(onSave.mutate)}>
           <div className="mb-4">
             <Dropdown
               labelText="Customer"
@@ -189,8 +161,5 @@ export function EditRentalModal({
         </form>
       </FormModal>
     </>
-
-    //   </div>
-    // </div>
   );
 }

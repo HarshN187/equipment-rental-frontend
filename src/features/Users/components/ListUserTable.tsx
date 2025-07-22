@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  keepPreviousData,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { Bounce, Flip, toast } from "react-toastify";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { Bounce, toast } from "react-toastify";
 import { userApi } from "../../../api";
 import { EditUserModal } from "./EditUserModel";
 import PaginationButton from "../../../components/Datatable/PaginationButton";
+import { useDeleteUser } from "../hooks/useDeleteUser";
+import { useUpdateUser } from "../hooks/useUpdateUser";
 
 interface UserData {
   user_id: string;
@@ -24,7 +21,6 @@ function ListUserTable() {
   // const { id } = useParams();
   const [pageNumber, setPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
-  const queryClient = useQueryClient();
 
   const { data, isError, isLoading, refetch, error } = useQuery({
     queryKey: ["users", pageNumber, perPage],
@@ -37,40 +33,7 @@ function ListUserTable() {
     placeholderData: keepPreviousData,
   });
 
-  const deleteMutation = useMutation({
-    mutationFn: (user: UserData) => {
-      return userApi.deleteUser({ id: Number(user.user_id) });
-    },
-    onSuccess: (response, userToDelete) => {
-      toast.success(`${userToDelete.name} Successfully Deleted!`, {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-
-      refetch();
-    },
-    onError: (err, userToDelete) => {
-      console.error("Error deleting user:", err);
-      toast.error(`Failed to delete ${userToDelete?.name || "user"}!`, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-    },
-  });
+  const deleteMutation = useDeleteUser(refetch);
 
   const handleDeleteClick = (user: UserData) => {
     if (confirm(`Are you sure you want to delete ${user.name}?`)) {
@@ -78,41 +41,11 @@ function ListUserTable() {
     }
   };
 
-  const updateMutation = useMutation({
-    mutationFn: (updatedUser) => {
-      return userApi.patch(updatedUser);
-    },
-    onSuccess: (_, updatedUser) => {
-      toast.success(`${updatedUser.name} Successfully Updated!`, {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-      refetch();
-      setIsModalOpen(false);
-      setSelectedUser(null);
-    },
-    onError: (err, updatedUser) => {
-      console.error("Error Updating user:", err);
-      toast.error(`Failed to update ${updatedUser?.name || "user"}!`, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-    },
-  });
+  const updateMutation = useUpdateUser(
+    refetch,
+    setIsModalOpen,
+    setSelectedUser
+  );
 
   useEffect(() => {
     if (data) setTotalPages(Math.ceil(data.data.total_count / perPage));

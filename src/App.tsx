@@ -3,13 +3,7 @@ import "./App.css";
 import router from "./routes/routes";
 import { ToastContainer } from "react-toastify";
 // import { useState } from "react";
-import {
-  ReactQueryDevtools,
-  ReactQueryDevtoolsPanel,
-} from "@tanstack/react-query-devtools";
-// import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
-// Register all Community features
-// ModuleRegistry.registerModules([AllCommunityModule]);
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
   // const [isOpen, setIsOpen] = useState(false);
