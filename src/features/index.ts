@@ -1,6 +1,6 @@
-import { EditUserModal } from "../components/Users/EditUserModel";
+import { EditUserModal } from "./Users/components/EditUserModel";
 import Login from "./auth/LoginPage";
-import Dashboard from "./Dashboard";
+import Dashboard from "./Dashboard/Dashboard";
 import AddEquipmentPage from "./Equipments/AddEquipmentPage";
 import CategoryPage from "./Equipments/CategoryPage";
 import EquipmentPage from "./Equipments/EquipmentPage";

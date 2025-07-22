@@ -1,11 +1,11 @@
 import React from "react";
-import FormAction from "../Form/FormAction";
+import FormAction from "../../../components/Form/FormAction";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userSchema, type UserData } from "../../types/user.types";
-import { addUserFields } from "../../constants/formFields";
-import { Input } from "../Form/Input";
-import { userApi } from "../../api";
+import { userSchema, type UserData } from "../../../types/user.types";
+import { addUserFields } from "../../../constants/formFields";
+import { Input } from "../../../components/Form/Input";
+import { userApi } from "../../../api";
 import { useNavigate } from "react-router-dom";
 
 const fields = addUserFields;

@@ -1,11 +1,11 @@
-import FormAction from "./FormAction";
-import FormExtra from "./FormExtra";
+import FormAction from "../../../components/Form/FormAction";
+import FormExtra from "../../../components/Form/FormExtra";
 import { useForm } from "react-hook-form";
-import { Input } from "./Input";
-import { loginFields } from "../../constants/formFields";
+import { Input } from "../../../components/Form/Input";
+import { loginFields } from "../../../constants/formFields";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, type LoginData } from "../../types/login.types";
-import { loginApi } from "../../api";
+import { LoginSchema, type LoginData } from "../../../types/login.types";
+import { loginApi } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { Bounce, Flip, toast } from "react-toastify";
 

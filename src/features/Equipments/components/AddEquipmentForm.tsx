@@ -1,16 +1,16 @@
-import { Dropdown } from "../Form/DropDown";
+import { Dropdown } from "../../../components/Form/DropDown";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FormAction from "../Form/FormAction";
-import { Input } from "../Form/Input";
-import { equipmentApi } from "../../api";
+import FormAction from "../../../components/Form/FormAction";
+import { Input } from "../../../components/Form/Input";
+import { equipmentApi } from "../../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addEquipmentFields } from "../../constants/formFields";
+import { addEquipmentFields } from "../../../constants/formFields";
 import {
   equipmentSchema,
   type EquipmentData,
-} from "../../types/equipment.types";
+} from "../../../types/equipment.types";
 
 export function AddEquipmentForm() {
   const {

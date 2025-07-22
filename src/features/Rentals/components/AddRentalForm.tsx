@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { equipmentApi, rentalApi, userApi } from "../../api";
-import { rentalSchema, type RentalData } from "../../types/rentals.types";
-import { Dropdown } from "../Form/DropDown";
-import { Input } from "../Form/Input";
-import FormAction from "../Form/FormAction";
+import { equipmentApi, rentalApi, userApi } from "../../../api";
+import { rentalSchema, type RentalData } from "../../../types/rentals.types";
+import { Dropdown } from "../../../components/Form/DropDown";
+import { Input } from "../../../components/Form/Input";
+import FormAction from "../../../components/Form/FormAction";
 import { useNavigate } from "react-router-dom";
 import { Flip, toast } from "react-toastify";
 

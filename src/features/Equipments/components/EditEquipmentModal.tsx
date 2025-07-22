@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import {
   equipmentSchema,
   type EquipmentData,
-} from "../../types/equipment.types";
+} from "../../../types/equipment.types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

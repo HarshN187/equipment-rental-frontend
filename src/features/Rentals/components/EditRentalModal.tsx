@@ -1,12 +1,12 @@
-import { Input } from "../Form/Input";
+import { Input } from "../../../components/Form/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { rentalSchema, type RentalData } from "../../types/rentals.types";
-import { Dropdown } from "../Form/DropDown";
+import { rentalSchema, type RentalData } from "../../../types/rentals.types";
+import { Dropdown } from "../../../components/Form/DropDown";
 import { useEffect, useState } from "react";
-import { formatDateHTML } from "../../utils/formateDate";
-import { equipmentApi, userApi } from "../../api";
-import FormModal from "../Form/FormModal";
+import { formatDateHTML } from "../../../utils/formateDate";
+import { equipmentApi, userApi } from "../../../api";
+import FormModal from "../../../components/Form/FormModal";
 
 interface EditRentalModalProps {
   rental: RentalData;

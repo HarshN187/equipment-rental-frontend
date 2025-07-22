@@ -1,6 +1,6 @@
 import React, { useEffect, useState, type JSX } from "react";
-import { equipmentApi } from "../../api";
-import MyDataTable from "../Datatable/MyDataTable";
+import { equipmentApi } from "../../../api";
+import MyDataTable from "../../../components/Datatable/MyDataTable";
 import { Link } from "react-router-dom";
 import AddCategoryModal from "./addCategoryModal";
 

@@ -5,7 +5,7 @@ import {
   FaTools,
   FaUsers,
 } from "react-icons/fa";
-import { equipmentApi, rentalApi, userApi } from "../../api";
+import { equipmentApi, rentalApi, userApi } from "../../../api";
 import StatisticsBox from "./StatisticsBox";
 
 function Statistics() {

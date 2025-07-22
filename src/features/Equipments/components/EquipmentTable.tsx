@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { equipmentApi } from "../../api";
-import MyDataTable from "../Datatable/MyDataTable";
-import type { EquipmentData } from "../../types/equipment.types";
+import { equipmentApi } from "../../../api";
+import MyDataTable from "../../../components/Datatable/MyDataTable";
+import type { EquipmentData } from "../../../types/equipment.types";
 import { Bounce, toast } from "react-toastify";
 
 function EquipmentTable() {

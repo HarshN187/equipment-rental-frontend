@@ -3,7 +3,10 @@ import "./App.css";
 import router from "./routes/routes";
 import { ToastContainer } from "react-toastify";
 // import { useState } from "react";
-// import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
+import {
+  ReactQueryDevtools,
+  ReactQueryDevtoolsPanel,
+} from "@tanstack/react-query-devtools";
 // import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -15,10 +18,12 @@ function App() {
     <>
       {/* <button onClick={() => setIsOpen(!isOpen)}>{`${
         isOpen ? "Close" : "Open"
-      } the devtools panel`}</button>
-      {isOpen && <ReactQueryDevtoolsPanel onClose={() => setIsOpen(false)} />} */}
+      } the devtools panel`}</button>*/}
+      {/* {isOpen && <ReactQueryDevtoolsPanel onClose={() => setIsOpen(false)} />} */}
+      <ReactQueryDevtools initialIsOpen={false} />
+
       <RouterProvider router={router}></RouterProvider>
-      <ToastContainer position="top-center"></ToastContainer>
+      <ToastContainer position="top-right"></ToastContainer>
     </>
   );
 }

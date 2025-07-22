@@ -1,10 +1,10 @@
-import { Dropdown } from "../Form/DropDown";
-import { addressSchema, type AddressData } from "../../types/address.types";
+import { Dropdown } from "../../../components/Form/DropDown";
+import { addressSchema, type AddressData } from "../../../types/address.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import FormAction from "../Form/FormAction";
-import { Input } from "../Form/Input";
-import { userApi } from "../../api";
+import FormAction from "../../../components/Form/FormAction";
+import { Input } from "../../../components/Form/Input";
+import { userApi } from "../../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

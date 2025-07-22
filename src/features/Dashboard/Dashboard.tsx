@@ -1,4 +1,5 @@
-import { RecentActivity, Statistics } from "../components";
+import RecentActivity from "./components/RecentActivity";
+import Statistics from "./components/Statistics";
 
 const Dashboard = () => {
   return (

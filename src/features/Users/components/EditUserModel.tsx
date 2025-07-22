@@ -1,9 +1,9 @@
-
-import { Input } from "../Form/Input";
-import { addUserFields } from "../../constants/formFields";
+import { Input } from "../../../components/Form/Input";
+import { addUserFields } from "../../../constants/formFields";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userSchema, type UserData } from "../../types/user.types";
+import { userSchema, type UserData } from "../../../types/user.types";
+import FormModal from "../../../components/Form/FormModal";
 
 export function EditUserModal({ user, onClose, onSave }: any) {
   const {
@@ -16,19 +16,19 @@ export function EditUserModal({ user, onClose, onSave }: any) {
   });
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
+    <>
+      <FormModal>
         <h2 className="text-xl font-bold mb-4">Edit User</h2>
-        <form onSubmit={handleSubmit(onSave)}>
+        <form onSubmit={handleSubmit(onSave.mutate)}>
           <div className="mb-4">
             <Input
               labelText=""
               labelFor="id"
-              name="id"
+              name="user_id"
               type="hidden"
               defaultValue={user.user_id}
               register={register}
-              error={errors["id"]}
+              error={errors["user_id"]}
             />
 
             {addUserFields.map((ele, index) => (
@@ -61,7 +61,7 @@ export function EditUserModal({ user, onClose, onSave }: any) {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </FormModal>
+    </>
   );
 }

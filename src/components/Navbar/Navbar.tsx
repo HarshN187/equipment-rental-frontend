@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HiChevronDown } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { menuItems } from "../../constants/navbarFields";
 import Cookies from "js-cookie";
 
@@ -37,7 +37,11 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <span className="text-gray-800 text-xl font-bold">RentalPro</span>
+              <Link to="dashboard">
+                <span className="text-gray-800 text-xl font-bold">
+                  RentalPro
+                </span>
+              </Link>
             </div>
           </div>
 
@@ -100,12 +104,12 @@ const Navbar = () => {
 
             {isProfileDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-                <NavLink
+                {/* <NavLink
                   to="/profile"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600"
                 >
                   Profile
-                </NavLink>
+                </NavLink> */}
                 <button
                   onClick={handleLogout}
                   className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"

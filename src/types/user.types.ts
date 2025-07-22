@@ -1,7 +1,7 @@
 import { z } from "zod"; // Add new import
 
 export const userSchema = z.object({
-  id: z.string().optional(),
+  user_id: z.string().optional(),
   name: z.string().trim().min(2, { message: "please enter name" }),
   email: z.string().email(),
   phone: z

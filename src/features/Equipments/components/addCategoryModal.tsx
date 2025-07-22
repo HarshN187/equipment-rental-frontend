@@ -3,15 +3,15 @@ import { type JSX } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { equipmentApi } from "../../api";
+import { equipmentApi } from "../../../api";
 import {
   categorySchema,
   type CategoryFormData,
-} from "../../types/category.types";
+} from "../../../types/category.types";
 import { Flip, toast } from "react-toastify";
-import { addCategoryFields } from "../../constants/formFields";
-import { Input } from "../Form/Input";
-import FormModal from "../Form/FormModal";
+import { addCategoryFields } from "../../../constants/formFields";
+import { Input } from "../../../components/Form/Input";
+import FormModal from "../../../components/Form/FormModal";
 
 interface AddCategoryModalProps {
   onClose: () => void;

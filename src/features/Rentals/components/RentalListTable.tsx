@@ -1,9 +1,9 @@
 import { useEffect, useState, type JSX } from "react";
-import { rentalApi } from "../../api";
-import { MyTable } from "..";
-import { formatDateHTML } from "../../utils/formateDate";
+import { rentalApi } from "../../../api";
+import { MyTable } from "../../../components";
+import { formatDateHTML } from "../../../utils/formateDate";
 import { EditRentalModal } from "./EditRentalModal";
-import type { RentalData } from "../../types/rentals.types";
+import type { RentalData } from "../../../types/rentals.types";
 import { Bounce, toast } from "react-toastify";
 
 function RentalListTable(): JSX.Element {
