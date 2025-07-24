@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormAction from "../../../components/Form/FormAction";
 import { Input } from "../../../components/Form/Input";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import { addEquipmentFields } from "../../../constants/formFields";
 import {
@@ -18,12 +18,11 @@ interface DropdownOption {
   label: string;
 }
 
-export function AddEquipmentForm() {
+export function AddEquipmentForm(): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<EquipmentData>({
     resolver: zodResolver(equipmentSchema),
   });

@@ -25,7 +25,7 @@ export function useCheckLogin() {
         navigate("login");
       }
     } catch (e) {
-      // alert(e);
+     
       toast.error("Please Login !", {
         position: "top-right",
         autoClose: 2000,

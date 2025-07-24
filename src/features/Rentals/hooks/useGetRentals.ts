@@ -5,13 +5,14 @@ import { formatDateHTML } from "../../../utils/formateDate";
 const fetchData = async () => {
   try {
     const response = await rentalApi.getAll();
+    console.log(response);
 
     const mappedData = response.data.map((ele, index: number) => {
       return {
         e_id: index + 1,
         id: ele.id,
-        customer: ele.user.name,
-        equipment: ele.equipment.name,
+        customer: ele.user ? ele.user.name : "Deleted Customer",
+        equipment: ele.equipment ? ele.equipment.name : "Deleted Equipment",
         quantity: ele.quantity,
         start_date: formatDateHTML(ele.start_date),
         end_date: formatDateHTML(ele.end_date),
@@ -19,6 +20,8 @@ const fetchData = async () => {
         status: ele.status,
       };
     });
+
+    console.log(mappedData);
 
     return mappedData;
   } catch (e) {

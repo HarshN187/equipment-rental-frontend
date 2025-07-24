@@ -29,7 +29,7 @@ const loginFields: Array<LoginProps> = [
   },
 ];
 
-//I used Omit<LoginProps, 'name'> to inherit all properties from LoginProps except for name.
+// used Omit<LoginProps, 'name'> to inherit all properties from LoginProps except for name.
 interface SignupProps extends Omit<LoginProps, "name"> {
   name: fieldNames;
 }

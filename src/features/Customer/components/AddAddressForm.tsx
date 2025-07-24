@@ -5,15 +5,14 @@ import { useForm } from "react-hook-form";
 import FormAction from "../../../components/Form/FormAction";
 import { Input } from "../../../components/Form/Input";
 import { customerApi } from "../../../api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function AddAddressForm() {
+export function AddAddressForm(): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<AddressData>({
     resolver: zodResolver(addressSchema),
   });

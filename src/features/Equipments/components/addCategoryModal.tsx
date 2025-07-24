@@ -1,4 +1,4 @@
-// AddCategoryModal.tsx
+
 import { type JSX } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,7 @@ function AddCategoryModal({
     register,
     handleSubmit,
     formState: { errors },
-    setError,
+    
     reset,
   } = useForm<CategoryFormData>({
     resolver: zodResolver(categorySchema),
@@ -55,9 +55,7 @@ function AddCategoryModal({
   };
 
   return (
-    // <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
-    //   <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-    <>
+     <>
       <FormModal>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Add New Category</h2>
@@ -150,8 +148,7 @@ function AddCategoryModal({
       </FormModal>
     </>
 
-    //   </div>
-    // </div>
+ 
   );
 }
 

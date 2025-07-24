@@ -1,11 +1,11 @@
-import React from "react";
+import { type JSX } from "react";
 
 interface Props {
   onClose: () => void;
   isSubmitting: boolean;
 }
 
-function ModelFormButtons({ onClose, isSubmitting }: Props) {
+function ModelFormButtons({ onClose, isSubmitting }: Props): JSX.Element {
   return (
     <div>
       <div className="flex justify-end mt-6">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { rentalSchema, type RentalData } from "../../../types/rentals.types";
@@ -13,7 +13,7 @@ interface DropdownOption {
   label: string;
 }
 
-function AddRentalForm() {
+function AddRentalForm(): JSX.Element {
   const {
     register,
     handleSubmit,

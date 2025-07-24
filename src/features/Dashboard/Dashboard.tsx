@@ -1,7 +1,8 @@
+import type React from "react";
 import RecentActivity from "./components/RecentActivity";
 import Statistics from "./components/Statistics";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   return (
     <>
       <div className="max-w-auto mx-auto px-4  mt-8">

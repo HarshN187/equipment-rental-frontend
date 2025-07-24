@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import { useState, type FC } from "react";
 import { HiChevronDown } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { menuItems } from "../../constants/navbarFields";
 import Cookies from "js-cookie";
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar: FC = (): ReturnType<FC> => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const navigate = useNavigate();
 

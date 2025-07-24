@@ -1,8 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Updated import
+import { type FC } from "react";
+import { useNavigate } from "react-router-dom";
 
-const NotFoundPage = () => {
-  const navigate = useNavigate(); // useNavigate instead of useHistory
+const NotFoundPage: FC = () => {
+  const navigate = useNavigate();
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -16,10 +16,10 @@ const NotFoundPage = () => {
           exist.
         </p>
         <button
-          onClick={() => navigate(-1)} // Updated to use navigate()
+          onClick={() => navigate(-1)}
           className="mt-6 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none"
         >
-          Go Back to Home
+          Go Back
         </button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 
 import MyDataTable from "../../../components/Datatable/MyDataTable";
 import type { EquipmentData } from "../../../types/equipment.types";
@@ -6,30 +6,27 @@ import EditEquipmentModal from "./EditEquipmentModal";
 import { useUpdateEquipment } from "../hooks/useUpdateEquipment";
 import { useDeleteEquipment } from "../hooks/useDeleteEquipment";
 import { useGetEquipments } from "../hooks/useGetEquipments";
+import { Flip, toast } from "react-toastify";
 
-function EquipmentTable() {
-  // const [data, setData] = useState([]);
+function EquipmentTable(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEquipment, setSelectedEquip] = useState<any>();
 
-  // const fetchData = async () => {
-  //   const response = await equipmentApi.getAll();
+  const { data, refetch, isError, error } = useGetEquipments();
 
-  //   const mappedData = response.data.map((ele, index: number) => {
-  //     return {
-  //       ...ele,
-  //       id: index + 1,
-  //       category: ele.category.name,
-  //       category_id: ele.category.cat_id,
-  //     };
-  //   });
-
-  //   setData(mappedData);
-  // };
-
-  const { data, refetch, error, isLoading } = useGetEquipments();
-
-  console.log(data);
+  if (isError) {
+    toast.error(error.message || `Failed to fetch Equipments!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Flip,
+    });
+  }
 
   const handleEditClick = async (data) => {
     setSelectedEquip(data);
@@ -39,7 +36,6 @@ function EquipmentTable() {
   const deleteMutation = useDeleteEquipment(refetch);
   const handleDeleteClick = async (data: EquipmentData) => {
     if (confirm("are you sure want to delete")) {
-      // await equipmentApi.delete({ id: data.e_id });
       deleteMutation.mutate(data);
     }
   };
@@ -78,10 +74,6 @@ function EquipmentTable() {
     },
   ];
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedEquip(null);
@@ -91,7 +83,7 @@ function EquipmentTable() {
 
   const onUpdateSubmit = (data: EquipmentData) => {
     updateMutation.mutate(data);
-    // refetch();
+
     handleCloseModal();
   };
 

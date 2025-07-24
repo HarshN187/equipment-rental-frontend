@@ -4,22 +4,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema, type UserData } from "../../../types/user.types";
 import { addUserFields } from "../../../constants/formFields";
 import { Input } from "../../../components/Form/Input";
-import { customerApi } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { useAddCustomer } from "../hooks/useAddCustomer";
+import type { JSX } from "react";
 
 const fields = addUserFields;
 
-function AddUserForm() {
+function AddUserForm(): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<UserData>({
     resolver: zodResolver(userSchema),
   });
-  const navigate = useNavigate();
 
   const addMutation = useAddCustomer();
 

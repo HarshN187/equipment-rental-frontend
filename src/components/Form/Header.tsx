@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -12,7 +13,7 @@ export default function Header({
   paragraph,
   linkName,
   linkUrl = "#",
-}: Props) {
+}: Props): JSX.Element {
   return (
     <div className="mb-5">
       <div className="flex justify-center">

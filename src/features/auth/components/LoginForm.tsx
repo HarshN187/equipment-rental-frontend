@@ -8,6 +8,7 @@ import { LoginSchema, type LoginData } from "../../../types/login.types";
 import { loginApi } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { Bounce, Flip, toast } from "react-toastify";
+import type { JSX } from "react";
 
 const fields = loginFields;
 
@@ -18,12 +19,11 @@ export interface LoginFormData {
   password: string;
 }
 
-export function LoginForm() {
+export function LoginForm(): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<LoginData>({
     resolver: zodResolver(LoginSchema),
   });
@@ -31,7 +31,6 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   const onSubmit = async (data: LoginData) => {
-    // e.preventDefault();
     try {
       const res = await loginApi.post(data);
       console.log(res);

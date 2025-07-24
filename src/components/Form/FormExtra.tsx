@@ -1,4 +1,6 @@
-export default function FormExtra() {
+import type { JSX } from "react";
+
+export default function FormExtra(): JSX.Element {
   return (
     <div className="flex items-center justify-end ">
       {/* <div className="flex items-center">

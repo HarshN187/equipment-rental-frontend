@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { rentalSchema, type RentalData } from "../../../types/rentals.types";
 import { Dropdown } from "../../../components/Form/DropDown";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { formatDateHTML } from "../../../utils/formateDate";
 import FormModal from "../../../components/Form/FormModal";
 import { useGetDropDownData } from "../hooks/useGetDropDownData";
@@ -23,7 +23,7 @@ export function EditRentalModal({
   rental,
   onClose,
   onSave,
-}: EditRentalModalProps) {
+}: EditRentalModalProps): JSX.Element {
   const {
     register,
     handleSubmit,

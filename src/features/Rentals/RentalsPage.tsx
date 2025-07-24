@@ -1,6 +1,7 @@
+import type { JSX } from "react";
 import { RentalListTable } from "../../components";
 
-function RentalsPage() {
+function RentalsPage(): JSX.Element {
   return (
     <div>
       <div className="container mx-auto p-6 ">

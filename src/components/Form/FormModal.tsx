@@ -1,6 +1,6 @@
-import React from "react";
+import React, { type JSX } from "react";
 
-function FormModal(props: { children: React.ReactNode }) {
+function FormModal(props: { children: React.ReactNode }): JSX.Element {
   return (
     <div>
       <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center z-50">

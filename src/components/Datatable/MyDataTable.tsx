@@ -1,10 +1,8 @@
-import React, { type JSX, useState } from "react";
+import React, { type FC, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { type ColumnProps } from "primereact/column";
 import { InputText } from "primereact/inputtext";
-import { IconField } from "primereact/iconfield";
-import { InputIcon } from "primereact/inputicon";
 
 interface MyColumn extends ColumnProps {
   field?: string;
@@ -24,15 +22,8 @@ interface MyDataTableProps {
   rowClass?: () => string;
 }
 
-import { Dropdown } from "primereact/dropdown";
-
-function MyDataTable(props: MyDataTableProps): JSX.Element {
-  const [globalFilter, setGlobalFilter] = useState<string>(""); // State for global filter
-
-  const [filters, setFilters] = useState<any>({
-    global: { value: "", matchMode: "contains" },
-    category: { value: null, matchMode: "equals" },
-  });
+function MyDataTable(props: MyDataTableProps): ReturnType<FC> {
+  const [globalFilter, setGlobalFilter] = useState<string>("");
 
   const header = (
     <div className="flex justify-end p-2">

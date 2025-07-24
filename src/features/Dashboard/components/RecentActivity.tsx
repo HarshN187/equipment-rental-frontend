@@ -1,6 +1,6 @@
+import type { JSX } from "react";
 
-
-function RecentActivity() {
+function RecentActivity(): JSX.Element {
   return (
     <>
       {" "}

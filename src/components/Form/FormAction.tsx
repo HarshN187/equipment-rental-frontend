@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import type React from "react";
 
 interface Props {
@@ -10,7 +11,7 @@ export default function FormAction({
   // handleSubmit,
   type = "submit",
   text,
-}: Props) {
+}: Props): JSX.Element {
   return (
     <>
       <button

@@ -10,19 +10,11 @@ const fields = signupFields;
 
 fields.forEach((field, index) => (field.id = index));
 
-// interface SignUpFormData {
-//   username: string;
-//   email: string;
-//   password: string;
-//   confirmPassword: string;
-// }
-
 export default function Signup() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<SignupData>({
     resolver: zodResolver(SignupSchema),
   });

@@ -1,6 +1,7 @@
+import type { JSX } from "react";
 import { EquipmentTable } from "../../components";
 
-function EquipmentPage() {
+function EquipmentPage(): JSX.Element {
   return (
     <>
       <div className="container mx-auto p-6 ">

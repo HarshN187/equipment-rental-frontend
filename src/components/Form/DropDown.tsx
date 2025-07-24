@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import { type FieldError, type UseFormRegister } from "react-hook-form";
 
 const fixedInputClass =
@@ -27,7 +28,7 @@ export function Dropdown({
   customClass,
   valueAsNumber,
   error,
-}: SelectProps) {
+}: SelectProps): JSX.Element {
   return (
     <div className="mt-5 mb-4">
       <label
@@ -39,7 +40,7 @@ export function Dropdown({
       <div className="relative">
         <select
           id={labelFor}
-          value={defaultValue ? defaultValue : "def"}
+          defaultValue={defaultValue ? defaultValue : "def"}
           className={fixedInputClass + customClass}
           {...register(name, { valueAsNumber })}
         >

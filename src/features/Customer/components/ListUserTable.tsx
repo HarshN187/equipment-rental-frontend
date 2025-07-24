@@ -186,13 +186,12 @@
 // export default ListUserTable;
 
 import { useEffect, useRef, useState } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { Bounce, toast } from "react-toastify";
-import { customerApi } from "../../../api";
 import { EditUserModal } from "./EditUserModel";
 import PaginationButton from "../../../components/Datatable/PaginationButton";
 import { useDeleteUser } from "../hooks/useDeleteCustomer";
 import { useUpdateUser } from "../hooks/useUpdateCustomer";
+import { useGetCustomer } from "../hooks/useGetCustomer";
 
 interface UserData {
   user_id: string;
@@ -201,17 +200,12 @@ interface UserData {
   phone: string;
 }
 
-interface GetUserPaginationResponse {
-  userData: UserData[];
-  total_count: number;
-}
-
-function ListUserTable() {
+function ListUserTable(): React.ReactNode {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
-  const [totalPages, setTotalPages] = useState(1);
-  const [pageNumber, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(5);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [pageNumber, setPage] = useState<number>(1);
+  const [perPage, setPerPage] = useState<number>(5);
   const [searchQuery, setSearchquery] = useState<string>("");
   const currentTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -224,37 +218,7 @@ function ListUserTable() {
     isError,
     error,
     refetch,
-  } = useInfiniteQuery<
-    GetUserPaginationResponse,
-    Error,
-    GetUserPaginationResponse,
-    string[],
-    number
-  >({
-    queryKey: ["users", searchQuery],
-    queryFn: async ({ pageParam = 1 }) => {
-      const response = await customerApi.getUserPagination({
-        page: pageParam,
-        limit: perPage,
-        query: searchQuery,
-      });
-      return response.data;
-    },
-    getNextPageParam: (lastPage, allPages) => {
-      const totalCount = lastPage.total_count;
-      const loadedCount = allPages.reduce(
-        (acc, page) => acc + page.userData.length,
-        0
-      );
-      if (loadedCount < totalCount) {
-        return allPages.length + 1;
-      }
-      return undefined;
-    },
-
-    initialPageParam: 1,
-    placeholderData: (previousData) => previousData,
-  });
+  } = useGetCustomer(searchQuery, perPage);
 
   // Debouncing
   const handleSearchEvent = (e: React.ChangeEvent<HTMLInputElement>) => {

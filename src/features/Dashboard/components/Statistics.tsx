@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 import {
   FaCalendarAlt,
   FaShippingFast,
@@ -8,7 +8,7 @@ import {
 import { equipmentApi, rentalApi, customerApi } from "../../../api";
 import StatisticsBox from "./StatisticsBox";
 
-function Statistics() {
+function Statistics(): JSX.Element {
   const [userCount, setUserCount] = useState(0);
   const [equipmentCt, setEquipCt] = useState(0);
   const [avaiEquipmentCt, setavaiEquipCt] = useState(0);

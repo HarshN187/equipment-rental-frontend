@@ -1,9 +1,9 @@
-import React from "react";
+import { type FC } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import { useCheckLogin } from "../../hooks/checkLogin";
 
-function AppLayout() {
+function AppLayout(): ReturnType<FC> {
   useCheckLogin();
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 
 interface StatisticsBoxProps {
   iconcolor: string;
@@ -7,7 +7,7 @@ interface StatisticsBoxProps {
   children: React.ReactNode;
 }
 
-function StatisticsBox(props: StatisticsBoxProps) {
+function StatisticsBox(props: StatisticsBoxProps): JSX.Element {
   return (
     <div className="bg-white shadow rounded-lg p-6 flex items-center space-x-4">
       <div className={`${props.iconcolor} text-white p-4 rounded-full`}>

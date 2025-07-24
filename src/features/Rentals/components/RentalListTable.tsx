@@ -5,11 +5,26 @@ import { EditRentalModal } from "./EditRentalModal";
 import type { RentalData } from "../../../types/rentals.types";
 import { useGetRentals } from "../hooks/useGetRentals";
 import { useUpdateRental } from "../hooks/useUpdateRental";
+import { Flip, toast } from "react-toastify";
 
 function RentalListTable(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRental, setSelectedRental] = useState<any>();
-  const { data, isLoading, isError, error, refetch } = useGetRentals();
+  const { data, isError, error, refetch } = useGetRentals();
+
+  if (isError) {
+    toast.error(error.message || `Failed to fetch Equipments!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Flip,
+    });
+  }
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -46,6 +61,20 @@ function RentalListTable(): JSX.Element {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm"
         >
           Edit
+        </button>
+      ),
+      exportable: false,
+      style: { width: "8rem" },
+    },
+    {
+      header: "Actions",
+      body: (rowData: RentalData) => (
+        <button
+          onClick={() => handleEditClick(rowData)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm disabled:bg-blue-300"
+          disabled={rowData.status != "active"}
+        >
+          {rowData.status == "active" ? "complete" : "Completed"}
         </button>
       ),
       exportable: false,

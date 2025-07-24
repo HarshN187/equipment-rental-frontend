@@ -32,7 +32,7 @@ function EditEquipmentModal({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
+ 
   } = useForm<EquipmentData>({
     resolver: zodResolver(equipmentSchema),
 
@@ -42,7 +42,7 @@ function EditEquipmentModal({
       description: equipment.description,
       rent_per_day: equipment.rent_per_day,
       total_quntity: equipment.total_quntity,
-      // category: equipment.category_id,
+     
     },
   });
   console.log(equipment.category_id);

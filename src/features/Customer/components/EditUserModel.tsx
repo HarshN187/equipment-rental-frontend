@@ -4,13 +4,19 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema, type UserData } from "../../../types/user.types";
 import FormModal from "../../../components/Form/FormModal";
+import type { JSX } from "react";
 
-export function EditUserModal({ user, onClose, onSave }: any) {
+interface Props {
+  user: UserData;
+  onClose: () => void;
+  onSave: any;
+}
+
+export function EditUserModal({ user, onClose, onSave }: Props): JSX.Element {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<UserData>({
     resolver: zodResolver(userSchema),
   });

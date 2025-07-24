@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import type { FieldError, UseFormRegister } from "react-hook-form";
 
 const fixedInputClass =
@@ -35,7 +36,7 @@ export function Input({
   customClass,
   valueAsNumber,
   error,
-}: InputProps) {
+}: InputProps): JSX.Element {
   return (
     <>
       <div className="mt-5 mb-4">

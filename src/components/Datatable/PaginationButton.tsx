@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 
 type Props = {
   perPage: number;
@@ -14,7 +14,7 @@ function PaginationButton({
   setPage,
   pageNumber,
   totalPages,
-}: Props) {
+}: Props): JSX.Element {
   return (
     <>
       <div className="flex justify-center my-4 items-center space-x-2">

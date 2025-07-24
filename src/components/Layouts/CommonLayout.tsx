@@ -1,6 +1,7 @@
+import type React from "react";
 import { Outlet } from "react-router-dom";
 
-function CommonLayout() {
+function CommonLayout(): React.ReactElement<{}> {
   return (
     <div>
       <Outlet></Outlet>

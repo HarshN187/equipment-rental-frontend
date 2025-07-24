@@ -1,6 +1,7 @@
+import type { JSX } from "react";
 import { AddEquipmentForm } from "../../components";
 
-function AddEquipmentPage() {
+function AddEquipmentPage(): JSX.Element {
   return (
     <div>
       <div className=" flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
