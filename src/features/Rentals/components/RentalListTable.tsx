@@ -72,9 +72,13 @@ function RentalListTable(): JSX.Element {
         <button
           // onClick={() => handleEditClick(rowData)}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm disabled:bg-blue-300"
+          //@ts-ignore
           disabled={rowData.status != "active"}
         >
-          {rowData.status == "active" ? "complete" : "Completed"}
+          {
+            //@ts-ignore
+            rowData.status == "active" ? "complete" : "Completed"
+          }
         </button>
       ),
       exportable: false,

@@ -9,7 +9,7 @@ export function useDeleteUser(refetch: RefetchFunction<any, Error>) {
     mutationFn: (user: UserData) => {
       return customerApi.deleteUser({ id: Number(user.user_id) });
     },
-    onSuccess: (response, userToDelete) => {
+    onSuccess: (_response, userToDelete) => {
       toast.success(`${userToDelete.name} Successfully Deleted!`, {
         position: "top-right",
         autoClose: 1500,

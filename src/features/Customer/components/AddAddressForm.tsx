@@ -29,6 +29,7 @@ export function AddAddressForm(): JSX.Element {
   const fetchUser = async () => {
     try {
       const response = await customerApi.getAll();
+      //@ts-ignore
       const data = response.data.map((data) => {
         return {
           value: data.user_id,

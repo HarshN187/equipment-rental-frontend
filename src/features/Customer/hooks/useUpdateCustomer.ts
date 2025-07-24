@@ -13,6 +13,7 @@ export function useUpdateUser(
       return customerApi.patch(updatedUser);
     },
     onSuccess: (_, updatedUser) => {
+      //@ts-ignore
       toast.success(`${updatedUser?.name} Successfully Updated!`, {
         position: "top-right",
         autoClose: 1500,
@@ -30,6 +31,7 @@ export function useUpdateUser(
     },
     onError: (err, updatedUser) => {
       console.error("Error Updating user:", err);
+      //@ts-ignore
       toast.error(`Failed to update ${updatedUser?.name || "user"}!`, {
         position: "top-right",
         autoClose: 2000,

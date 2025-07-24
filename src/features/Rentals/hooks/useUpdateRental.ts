@@ -11,7 +11,7 @@ export function useUpdateRental(
 ) {
   return useMutation({
     mutationFn: (updatedRental: RentalData) => rentalApi.patch(updatedRental),
-    onSuccess: (res, updatedRent) => {
+    onSuccess: (_res,_updatedRent) => {
       toast.success(`Rental Successfully Updated!`, {
         position: "top-right",
         autoClose: 1500,
@@ -27,7 +27,7 @@ export function useUpdateRental(
       setIsModalOpen(false);
       setSelectedRental(null);
     },
-    onError: (err, updatedRent) => {
+    onError: (err, _updatedRent) => {
       console.error("Error Updating Rental:", err);
       toast.error(`Failed to update ${"rental"}!`, {
         position: "top-right",

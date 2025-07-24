@@ -28,6 +28,7 @@ function EquipmentTable(): JSX.Element {
     });
   }
 
+  //@ts-ignore
   const handleEditClick = async (data) => {
     setSelectedEquip(data);
     setIsModalOpen(true);

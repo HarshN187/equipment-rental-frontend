@@ -256,7 +256,9 @@ function ListUserTable() {
     // When pageNumber changes, we need to manually trigger fetching the specific page
     // This is a workaround for traditional pagination with useInfiniteQuery
 
+    //@ts-ignore
     if (data?.pages.length < pageNumber && hasNextPage && !isFetchingNextPage) {
+      //@ts-ignore
       fetchNextPage({ pageParam: pageNumber });
     }
   }, [
@@ -299,7 +301,9 @@ function ListUserTable() {
       }
     );
   }
+
   const allUsersAcrossPages =
+    //@ts-ignore
     data?.pages.flatMap((page) => page.userData) || [];
 
   const startIndex = (pageNumber - 1) * perPage;

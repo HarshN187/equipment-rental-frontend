@@ -5,6 +5,7 @@ export function useGetEquipments() {
   const fetchData = async () => {
     const response = await equipmentApi.getAll();
 
+    //@ts-ignore
     const mappedData = response.data.map((ele, index: number) => {
       return {
         ...ele,

@@ -1,5 +1,4 @@
 import type React from "react";
-import RecentActivity from "./components/RecentActivity";
 import Statistics from "./components/Statistics";
 
 const Dashboard: React.FC = () => {

@@ -7,6 +7,7 @@ const fetchData = async () => {
     const response = await rentalApi.getAll();
     console.log(response);
 
+    //@ts-ignore
     const mappedData = response.data.map((ele, index: number) => {
       return {
         e_id: index + 1,

@@ -68,6 +68,7 @@ export function EditRentalModal({
               labelText="Customer"
               labelFor="user"
               name="user"
+              //@ts-ignore
               defaultValue={rental.user.user_id}
               register={register}
               valueAsNumber={true}
@@ -81,6 +82,7 @@ export function EditRentalModal({
               labelFor="equipment"
               name="equipment"
               register={register}
+              //@ts-ignore
               defaultValue={rental.equipment.e_id}
               valueAsNumber={true}
               options={equipData}

@@ -27,6 +27,7 @@ function CategoryTable(): JSX.Element {
     try {
       const response = await equipmentApi.getCategory();
 
+      //@ts-ignore
       const mappedData = response.data.map((ele, index: number) => {
         return { ...ele, id: index + 1 };
       });

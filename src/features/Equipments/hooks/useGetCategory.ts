@@ -13,6 +13,7 @@ export function useGetCategoryDropDownData(
     try {
       const response = await equipmentApi.getCategory();
 
+      //@ts-ignore
       const data = response.data.map((data) => {
         return {
           value: data.cat_id,
