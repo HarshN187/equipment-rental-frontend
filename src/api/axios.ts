@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 
 export const instance = axios.create({
   baseURL: VITE_API_URL,
-  timeout: 5000,
   withCredentials: true,
 });
 
