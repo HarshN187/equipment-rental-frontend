@@ -7,7 +7,6 @@ function AddRentalPage() {
         Add New Rental
       </h2>
       <div className="w-full max-w-2xl">
-        {" "}
         <AddRentalForm />
       </div>
     </div>

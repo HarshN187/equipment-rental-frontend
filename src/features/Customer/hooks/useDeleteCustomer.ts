@@ -1,16 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import type { RentalData } from "../../../types/rentals.types";
-import { rentalApi } from "../../../api";
 import { useMutation } from "@tanstack/react-query";
 import { Flip, toast } from "react-toastify";
+import type { UserData } from "../../../types/user.types";
+import { customerApi } from "../../../api";
+import type { RefetchFunction } from "../../../types/refetch.types";
 
-export function useCreateRental() {
-  const navigate = useNavigate();
-
+export function useDeleteUser(refetch: RefetchFunction<any, Error>) {
   return useMutation({
-    mutationFn: (data: RentalData) => rentalApi.post(data),
-    onSuccess: (_res, _newRent) => {
-      toast.success(`Successfully Rental created !`, {
+    mutationFn: (user: UserData) => {
+      return customerApi.deleteUser({ id: Number(user.user_id) });
+    },
+    onSuccess: (response, userToDelete) => {
+      toast.success(`${userToDelete.name} Successfully Deleted!`, {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: true,
@@ -21,11 +21,12 @@ export function useCreateRental() {
         theme: "dark",
         transition: Flip,
       });
-      navigate("/rentals");
+
+      refetch();
     },
-    onError: (err, _newRent) => {
-      console.error("Error Creating Rental:", err);
-      toast.error(`Failed to Create ${"rental"}!`, {
+    onError: (err, userToDelete) => {
+      console.error("Error deleting user:", err);
+      toast.error(`Failed to delete ${userToDelete?.name || "user"}!`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,

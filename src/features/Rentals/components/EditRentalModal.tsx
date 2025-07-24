@@ -5,7 +5,6 @@ import { rentalSchema, type RentalData } from "../../../types/rentals.types";
 import { Dropdown } from "../../../components/Form/DropDown";
 import { useEffect, useState } from "react";
 import { formatDateHTML } from "../../../utils/formateDate";
-import { equipmentApi, userApi } from "../../../api";
 import FormModal from "../../../components/Form/FormModal";
 import { useGetDropDownData } from "../hooks/useGetDropDownData";
 
@@ -36,13 +35,16 @@ export function EditRentalModal({
     defaultValues: {
       id: rental.id,
       quantity: rental.quantity,
-      user: rental.user.user_id,
-      equipment: rental.equipment.e_id,
+      // user: rental.user.user_id,
+      // equipment: rental.equipment.e_id,
       start_date: formatDateHTML(rental.start_date),
       end_date: formatDateHTML(rental.end_date),
       payment_status: rental.payment_status,
     },
   });
+
+  const [userData, setUserData] = useState<DropdownOption[]>([]);
+  const [equipData, setEquipData] = useState<DropdownOption[]>([]);
 
   useEffect(() => {
     reset({
@@ -53,9 +55,6 @@ export function EditRentalModal({
       payment_status: rental.payment_status,
     });
   }, [rental, reset]);
-
-  const [userData, setUserData] = useState<DropdownOption[]>([]);
-  const [equipData, setEquipData] = useState<DropdownOption[]>([]);
 
   useGetDropDownData(setUserData, setEquipData);
 
@@ -69,6 +68,7 @@ export function EditRentalModal({
               labelText="Customer"
               labelFor="user"
               name="user"
+              defaultValue={rental.user.user_id}
               register={register}
               valueAsNumber={true}
               options={userData}
@@ -81,6 +81,7 @@ export function EditRentalModal({
               labelFor="equipment"
               name="equipment"
               register={register}
+              defaultValue={rental.equipment.e_id}
               valueAsNumber={true}
               options={equipData}
               placeholder="Select equipment"
@@ -142,6 +143,7 @@ export function EditRentalModal({
               />
             </div>
           </div>
+
           <div className="flex justify-end mt-6">
             <button
               type="button"

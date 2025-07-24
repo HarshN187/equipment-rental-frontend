@@ -3,14 +3,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormAction from "../../../components/Form/FormAction";
 import { Input } from "../../../components/Form/Input";
-import { equipmentApi } from "../../../api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addEquipmentFields } from "../../../constants/formFields";
 import {
   equipmentSchema,
   type EquipmentData,
 } from "../../../types/equipment.types";
+import { useGetCategoryDropDownData } from "../hooks/useGetCategory";
+import { useAddEquipment } from "../hooks/useAddEquipment";
+
+interface DropdownOption {
+  value: number | string;
+  label: string;
+}
 
 export function AddEquipmentForm() {
   const {
@@ -22,49 +28,17 @@ export function AddEquipmentForm() {
     resolver: zodResolver(equipmentSchema),
   });
 
-  const [CategoryData, setCategoryData] = useState<
-    {
-      value: number | string;
-      label: string;
-    }[]
-  >();
+  const [CategoryData, setCategoryData] = useState<DropdownOption[]>([]);
 
   const navigate = useNavigate();
 
-  const fetchUser = async () => {
-    try {
-      const response = await equipmentApi.getCategory();
-      console.log(response.data);
+  useGetCategoryDropDownData(setCategoryData);
 
-      const data = response.data.map((data) => {
-        return {
-          value: data.category_id,
-          label: data.name,
-        };
-      });
-
-      console.log(data);
-
-      setCategoryData(data);
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  const addMutation = useAddEquipment();
 
   const onsubmit = async (data: EquipmentData) => {
-    console.log(data);
-    try {
-      const response = await equipmentApi.post(data);
-      console.log(response);
-      navigate("/equipment");
-    } catch (e) {
-      alert(e);
-      console.log(e);
-    }
+    addMutation.mutate(data);
+    navigate("/equipment");
   };
 
   return (

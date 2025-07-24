@@ -1,44 +1,46 @@
-import { useEffect, useState } from "react";
-import { equipmentApi } from "../../../api";
+import { useState } from "react";
+
 import MyDataTable from "../../../components/Datatable/MyDataTable";
 import type { EquipmentData } from "../../../types/equipment.types";
-import { Bounce, toast } from "react-toastify";
+import EditEquipmentModal from "./EditEquipmentModal";
+import { useUpdateEquipment } from "../hooks/useUpdateEquipment";
+import { useDeleteEquipment } from "../hooks/useDeleteEquipment";
+import { useGetEquipments } from "../hooks/useGetEquipments";
 
 function EquipmentTable() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEquipment, setSelectedEquip] = useState<any>();
 
-  const fetchData = async () => {
-    const response = await equipmentApi.getAll();
+  // const fetchData = async () => {
+  //   const response = await equipmentApi.getAll();
 
-    const mappedData = response.data.map((ele, index: number) => {
-      return { ...ele, id: index + 1, category: ele.category.name };
-    });
-    console.log(mappedData);
+  //   const mappedData = response.data.map((ele, index: number) => {
+  //     return {
+  //       ...ele,
+  //       id: index + 1,
+  //       category: ele.category.name,
+  //       category_id: ele.category.cat_id,
+  //     };
+  //   });
 
-    setData(mappedData);
+  //   setData(mappedData);
+  // };
+
+  const { data, refetch, error, isLoading } = useGetEquipments();
+
+  console.log(data);
+
+  const handleEditClick = async (data) => {
+    setSelectedEquip(data);
+    setIsModalOpen(true);
   };
 
-  const handleDeleteClick = async (data) => {
-    try {
-      console.log(data);
-      // alert({ ...data });
-      if (confirm("are you sure want to delete")) {
-        await equipmentApi.delete({ id: data.e_id });
-        fetchData();
-      }
-    } catch (e) {
-      console.log(e);
-      toast.error("Error during Deleting Equipment!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
+  const deleteMutation = useDeleteEquipment(refetch);
+  const handleDeleteClick = async (data: EquipmentData) => {
+    if (confirm("are you sure want to delete")) {
+      // await equipmentApi.delete({ id: data.e_id });
+      deleteMutation.mutate(data);
     }
   };
 
@@ -52,7 +54,7 @@ function EquipmentTable() {
       header: "Actions",
       body: (rowData: EquipmentData) => (
         <button
-          // onClick={() => handleEditClick(rowData)}
+          onClick={() => handleEditClick(rowData)}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm"
         >
           Edit
@@ -76,9 +78,22 @@ function EquipmentTable() {
     },
   ];
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedEquip(null);
+  };
+
+  const updateMutation = useUpdateEquipment(refetch);
+
+  const onUpdateSubmit = (data: EquipmentData) => {
+    updateMutation.mutate(data);
+    // refetch();
+    handleCloseModal();
+  };
 
   const rowClass = () => {
     return "py-2 text-lg my-2 hover:bg-gray-100 cursor-pointer";
@@ -92,6 +107,14 @@ function EquipmentTable() {
         rowClass={rowClass}
         columns={columns}
       ></MyDataTable>
+
+      {isModalOpen && selectedEquipment && (
+        <EditEquipmentModal
+          equipment={selectedEquipment}
+          onClose={handleCloseModal}
+          onSave={onUpdateSubmit}
+        ></EditEquipmentModal>
+      )}
     </>
   );
 }

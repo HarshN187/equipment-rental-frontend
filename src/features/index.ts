@@ -1,4 +1,4 @@
-import { EditUserModal } from "./Users/components/EditUserModel";
+import { EditUserModal } from "./Customer/components/EditUserModel";
 import Login from "./auth/LoginPage";
 import Dashboard from "./Dashboard/Dashboard";
 import AddEquipmentPage from "./Equipments/AddEquipmentPage";
@@ -7,9 +7,9 @@ import EquipmentPage from "./Equipments/EquipmentPage";
 import NotFoundPage from "./NotFoundPage";
 import AddRentalPage from "./Rentals/AddRentalPage";
 import RentalsPage from "./Rentals/RentalsPage";
-import AddAddressPage from "./Users/AddAddressPage";
-import AddUserPage from "./Users/AddUserPage";
-import UserListPage from "./Users/UserListPage";
+import AddAddressPage from "./Customer/AddAddressPage";
+import AddUserPage from "./Customer/AddUserPage";
+import UserListPage from "./Customer/UserListPage";
 export {
   EditUserModal,
   Dashboard,

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { equipmentApi, rentalApi, userApi } from "../../../api";
 import { rentalSchema, type RentalData } from "../../../types/rentals.types";
 import { Dropdown } from "../../../components/Form/DropDown";
 import { Input } from "../../../components/Form/Input";
 import FormAction from "../../../components/Form/FormAction";
-import { useNavigate } from "react-router-dom";
-import { Flip, toast } from "react-toastify";
 import { useGetDropDownData } from "../hooks/useGetDropDownData";
 import { useCreateRental } from "../hooks/useCreateRental";
 
@@ -28,31 +25,11 @@ function AddRentalForm() {
   const [userData, setUserData] = useState<DropdownOption[]>([]);
   const [equipData, setEquipData] = useState<DropdownOption[]>([]);
 
-  const navigate = useNavigate();
+  const createMutation = useCreateRental();
 
   const onsubmit = async (data: RentalData) => {
-    try {
-      const response = await rentalApi.post(data);
-
-      toast.success(`Successfully Rental created !`, {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
-      navigate("/rentals");
-    } catch (e) {
-      console.error("Error fetching data:", e);
-      alert("Failed to post rental data. Please try again.");
-    }
+    createMutation.mutate(data);
   };
-
-  const createMutation = useCreateRental();
 
   useGetDropDownData(setUserData, setEquipData);
 

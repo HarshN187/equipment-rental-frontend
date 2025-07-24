@@ -1,18 +1,19 @@
-import { Flip, toast } from "react-toastify";
-import { rentalApi } from "../../../api";
-import type { RentalData } from "../../../types/rentals.types";
 import { useMutation } from "@tanstack/react-query";
+import { Flip, toast } from "react-toastify";
+import { customerApi } from "../../../api";
 import type { RefetchFunction } from "../../../types/refetch.types";
 
-export function useUpdateRental(
-  setSelectedRental: React.Dispatch<React.SetStateAction<any>>,
+export function useUpdateUser(
+  refetch: RefetchFunction<any, Error>,
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  refetch: RefetchFunction<any, Error>
+  setSelectedUser: React.Dispatch<React.SetStateAction<any>>
 ) {
   return useMutation({
-    mutationFn: (updatedRental: RentalData) => rentalApi.patch(updatedRental),
-    onSuccess: (res, updatedRent) => {
-      toast.success(`Rental Successfully Updated!`, {
+    mutationFn: (updatedUser) => {
+      return customerApi.patch(updatedUser);
+    },
+    onSuccess: (_, updatedUser) => {
+      toast.success(`${updatedUser?.name} Successfully Updated!`, {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: true,
@@ -25,11 +26,11 @@ export function useUpdateRental(
       });
       refetch();
       setIsModalOpen(false);
-      setSelectedRental(null);
+      setSelectedUser(null);
     },
-    onError: (err, updatedRent) => {
-      console.error("Error Updating Rental:", err);
-      toast.error(`Failed to update ${"rental"}!`, {
+    onError: (err, updatedUser) => {
+      console.error("Error Updating user:", err);
+      toast.error(`Failed to update ${updatedUser?.name || "user"}!`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,

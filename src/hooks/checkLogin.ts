@@ -9,7 +9,7 @@ export function useCheckLogin() {
   const fetchFunction = async () => {
     try {
       const response = await loginApi.isLogin();
-      console.log("in checklogin", response);
+
       if (response.data != true) {
         toast.error("Please Login !", {
           position: "top-right",

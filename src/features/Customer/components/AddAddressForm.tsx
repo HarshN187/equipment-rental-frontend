@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormAction from "../../../components/Form/FormAction";
 import { Input } from "../../../components/Form/Input";
-import { userApi } from "../../../api";
+import { customerApi } from "../../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +29,7 @@ export function AddAddressForm() {
 
   const fetchUser = async () => {
     try {
-      const response = await userApi.getAll();
+      const response = await customerApi.getAll();
       const data = response.data.map((data) => {
         return {
           value: data.user_id,
@@ -50,7 +50,7 @@ export function AddAddressForm() {
   const onsubmit = async (data: AddressData) => {
     console.log(data);
     try {
-      const response = await userApi.postAddress(data);
+      const response = await customerApi.postAddress(data);
       console.log(response);
       navigate("/users");
     } catch (e) {

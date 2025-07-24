@@ -1,4 +1,4 @@
-import { equipmentApi, loginApi, rentalApi, userApi } from "./api";
+import { equipmentApi, loginApi, rentalApi, customerApi } from "./api";
 import { instance } from "./axios";
 
-export { instance, userApi, equipmentApi, rentalApi, loginApi };
+export { instance, customerApi, equipmentApi, rentalApi, loginApi };

@@ -1,16 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import type { RentalData } from "../../../types/rentals.types";
-import { rentalApi } from "../../../api";
 import { useMutation } from "@tanstack/react-query";
+import { equipmentApi } from "../../../api";
+import type { EquipmentData } from "../../../types/equipment.types";
 import { Flip, toast } from "react-toastify";
 
-export function useCreateRental() {
-  const navigate = useNavigate();
-
+export function useAddEquipment() {
   return useMutation({
-    mutationFn: (data: RentalData) => rentalApi.post(data),
-    onSuccess: (_res, _newRent) => {
-      toast.success(`Successfully Rental created !`, {
+    mutationFn: (data: EquipmentData) => equipmentApi.post(data),
+    onSuccess: (_res, _newCustomer) => {
+      toast.success(`Successfully Equipment Added !`, {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: true,
@@ -21,11 +18,10 @@ export function useCreateRental() {
         theme: "dark",
         transition: Flip,
       });
-      navigate("/rentals");
     },
-    onError: (err, _newRent) => {
-      console.error("Error Creating Rental:", err);
-      toast.error(`Failed to Create ${"rental"}!`, {
+    onError: (err, _newCust) => {
+      console.error("Error Creating Equipment:", err);
+      toast.error(err.message || `Failed to add Equipment!`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,

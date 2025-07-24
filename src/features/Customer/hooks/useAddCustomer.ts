@@ -1,16 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import { Flip, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { customerApi } from "../../../api";
 import type { UserData } from "../../../types/user.types";
-import { userApi } from "../../../api";
-import type { RefetchFunction } from "../../../types/refetch.types";
+import { Flip, toast } from "react-toastify";
 
-export function useDeleteUser(refetch: RefetchFunction<any, Error>) {
+export function useAddCustomer() {
+  const navigate = useNavigate();
   return useMutation({
-    mutationFn: (user: UserData) => {
-      return userApi.deleteUser({ id: Number(user.user_id) });
-    },
-    onSuccess: (response, userToDelete) => {
-      toast.success(`${userToDelete.name} Successfully Deleted!`, {
+    mutationFn: (data: UserData) => customerApi.post(data),
+    onSuccess: (_res, _newCustomer) => {
+      toast.success(`Successfully Customer Added !`, {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: true,
@@ -21,12 +20,11 @@ export function useDeleteUser(refetch: RefetchFunction<any, Error>) {
         theme: "dark",
         transition: Flip,
       });
-
-      refetch();
+      navigate("/customer");
     },
-    onError: (err, userToDelete) => {
-      console.error("Error deleting user:", err);
-      toast.error(`Failed to delete ${userToDelete?.name || "user"}!`, {
+    onError: (err, _newCust) => {
+      console.error("Error Creating Customer:", err);
+      toast.error(err.message || `Failed to Create Customer!`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,

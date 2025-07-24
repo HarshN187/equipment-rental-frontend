@@ -5,7 +5,7 @@ import {
   FaTools,
   FaUsers,
 } from "react-icons/fa";
-import { equipmentApi, rentalApi, userApi } from "../../../api";
+import { equipmentApi, rentalApi, customerApi } from "../../../api";
 import StatisticsBox from "./StatisticsBox";
 
 function Statistics() {
@@ -15,7 +15,7 @@ function Statistics() {
   const [activeRental, setActiveRental] = useState(0);
 
   async function getCount() {
-    const user = await userApi.getAll();
+    const user = await customerApi.getAll();
 
     const equipment = await equipmentApi.getAll();
 

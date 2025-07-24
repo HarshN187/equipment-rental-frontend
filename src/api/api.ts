@@ -6,7 +6,7 @@ const loginApi = {
   isLogin: () => instance.get("/app/check"),
 };
 
-const userApi = {
+const customerApi = {
   post: (data: any) => instance.post("/user", { ...data }),
   getAll: () => instance.get("/user"),
   getOne: (params: { id: number }) => instance.get(`/user/${params.id}`),
@@ -17,8 +17,10 @@ const userApi = {
   deleteAddress: (params: { id: number }) =>
     instance.delete(`/user/address/${params.id}`),
   deleteUser: (params: { id: number }) => instance.delete(`/user/${params.id}`),
-  getUserPagination: (params: { page: number; limit: number }) =>
-    instance.get(`/user/pagination/${params.limit}/${params.page}`),
+  getUserPagination: (params: { page: number; limit: number; query: string }) =>
+    instance.get(
+      `/user/pagination/${params.limit}/${params.page}?query=${params.query}`
+    ),
   search: (query: string) => instance.get(`user/search?query=${query}`),
 };
 
@@ -51,4 +53,4 @@ const rentalApi = {
     instance.get(`/rentals/paginate`, { params: params }),
 };
 
-export { userApi, rentalApi, equipmentApi, loginApi };
+export { customerApi, rentalApi, equipmentApi, loginApi };

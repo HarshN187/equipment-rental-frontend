@@ -8,7 +8,7 @@ export interface SelectProps {
   labelFor: string;
   name: string;
   register: UseFormRegister<any>;
-  defaultValue?: string;
+  defaultValue?: string | number;
   options: Array<{ label: string; value: string | number }> | undefined;
   placeholder: string;
   customClass?: string;
@@ -39,11 +39,11 @@ export function Dropdown({
       <div className="relative">
         <select
           id={labelFor}
-          defaultValue={defaultValue}
+          value={defaultValue ? defaultValue : "def"}
           className={fixedInputClass + customClass}
           {...register(name, { valueAsNumber })}
         >
-          <option disabled selected>
+          <option disabled value="def">
             {placeholder}
           </option>
           {options?.map((option, index) => (

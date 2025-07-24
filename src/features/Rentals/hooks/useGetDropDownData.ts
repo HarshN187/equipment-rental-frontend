@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { equipmentApi, userApi } from "../../../api";
+import { equipmentApi, customerApi } from "../../../api";
 
 interface DropdownOption {
   value: number | string;
@@ -12,7 +12,7 @@ export function useGetDropDownData(
 ) {
   const fetchData = async () => {
     try {
-      const allUserData = await userApi.getAll();
+      const allUserData = await customerApi.getAll();
       const allEquipmentData = await equipmentApi.getAll();
 
       const mappedUserData: DropdownOption[] = allUserData.data.map((data) => ({

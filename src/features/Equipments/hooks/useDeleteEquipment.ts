@@ -1,19 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
+import type { EquipmentData } from "../../../types/equipment.types";
+import { equipmentApi } from "../../../api";
 import { Flip, toast } from "react-toastify";
-import { userApi } from "../../../api";
 import type { RefetchFunction } from "../../../types/refetch.types";
 
-export function useUpdateUser(
-  refetch: RefetchFunction<any, Error>,
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  setSelectedUser: React.Dispatch<React.SetStateAction<any>>
-) {
+export function useDeleteEquipment(refetch: RefetchFunction<any, Error>) {
   return useMutation({
-    mutationFn: (updatedUser) => {
-      return userApi.patch(updatedUser);
-    },
-    onSuccess: (_, updatedUser) => {
-      toast.success(`${updatedUser?.name} Successfully Updated!`, {
+    mutationFn: (data: EquipmentData) =>
+      equipmentApi.delete({ id: Number(data.e_id) }),
+    onSuccess: (_res, _newCustomer) => {
+      toast.success(`Successfully Equipments Deleted !`, {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: true,
@@ -25,12 +21,10 @@ export function useUpdateUser(
         transition: Flip,
       });
       refetch();
-      setIsModalOpen(false);
-      setSelectedUser(null);
     },
-    onError: (err, updatedUser) => {
-      console.error("Error Updating user:", err);
-      toast.error(`Failed to update ${updatedUser?.name || "user"}!`, {
+    onError: (err, _newCust) => {
+      console.error("Error Deleteing Equipment:", err);
+      toast.error(err.message || `Failed to Delete Equipment!`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: true,

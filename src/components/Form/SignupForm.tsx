@@ -2,7 +2,7 @@ import FormAction from "./FormAction";
 import { signupFields } from "../../constants/formFields";
 import { Input } from "./Input";
 import { useForm } from "react-hook-form";
-import { userApi } from "../../api";
+import { customerApi } from "../../api";
 import { SignupSchema, type SignupData } from "../../types/signup.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -29,7 +29,7 @@ export default function Signup() {
 
   const onSubmit = async (data: SignupData) => {
     console.log(data);
-    const res = await userApi.post(data);
+    const res = await customerApi.post(data);
     console.log(res);
   };
 

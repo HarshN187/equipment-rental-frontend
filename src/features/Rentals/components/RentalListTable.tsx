@@ -3,12 +3,10 @@ import { rentalApi } from "../../../api";
 import { MyTable } from "../../../components";
 import { EditRentalModal } from "./EditRentalModal";
 import type { RentalData } from "../../../types/rentals.types";
-import { Bounce, toast } from "react-toastify";
 import { useGetRentals } from "../hooks/useGetRentals";
 import { useUpdateRental } from "../hooks/useUpdateRental";
 
 function RentalListTable(): JSX.Element {
-  // const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRental, setSelectedRental] = useState<any>();
   const { data, isLoading, isError, error, refetch } = useGetRentals();
@@ -25,8 +23,6 @@ function RentalListTable(): JSX.Element {
     setIsModalOpen(true);
   };
 
-  
-
   const updateMutation = useUpdateRental(
     setSelectedRental,
     setIsModalOpen,
@@ -41,7 +37,7 @@ function RentalListTable(): JSX.Element {
     { field: "start_date", header: "start_date" },
     { field: "end_date", header: "end_date" },
     { field: "payment_status", header: "Payment Status" },
-    { field: "status", header: "Order Status" },
+    // { field: "status", header: "Order Status" },
     {
       header: "Actions",
       body: (rowData: RentalData) => (

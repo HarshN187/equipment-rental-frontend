@@ -13,9 +13,9 @@ import CommonLayout from "./Layouts/CommonLayout";
 import Navbar from "./Navbar/Navbar";
 import AddRentalForm from "../features/Rentals/components/AddRentalForm";
 import RentalListTable from "../features/Rentals/components/RentalListTable";
-import { AddAddressForm } from "../features/Users/components/AddAddressForm";
-import AddUserForm from "../features/Users/components/AddUserForm";
-import ListUserTable from "../features/Users/components/ListUserTable";
+import { AddAddressForm } from "../features/Customer/components/AddAddressForm";
+import AddUserForm from "../features/Customer/components/AddUserForm";
+import ListUserTable from "../features/Customer/components/ListUserTable";
 
 export {
   RentalListTable,

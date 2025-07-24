@@ -4,8 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema, type UserData } from "../../../types/user.types";
 import { addUserFields } from "../../../constants/formFields";
 import { Input } from "../../../components/Form/Input";
-import { userApi } from "../../../api";
+import { customerApi } from "../../../api";
 import { useNavigate } from "react-router-dom";
+import { useAddCustomer } from "../hooks/useAddCustomer";
 
 const fields = addUserFields;
 
@@ -19,14 +20,11 @@ function AddUserForm() {
     resolver: zodResolver(userSchema),
   });
   const navigate = useNavigate();
-  const onSubmit = async (data: UserData) => {
-    try {
-      const response = await userApi.post(data);
 
-      navigate("/users");
-    } catch (e) {
-      alert(e);
-    }
+  const addMutation = useAddCustomer();
+
+  const onSubmit = async (data: UserData) => {
+    addMutation.mutate(data);
   };
 
   return (
