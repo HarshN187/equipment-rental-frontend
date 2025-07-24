@@ -200,7 +200,7 @@ interface UserData {
   phone: string;
 }
 
-function ListUserTable(): React.ReactNode {
+function ListUserTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -219,7 +219,7 @@ function ListUserTable(): React.ReactNode {
     error,
     refetch,
   } = useGetCustomer(searchQuery, perPage);
-
+  console.log(data);
   // Debouncing
   const handleSearchEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (currentTimeout.current) clearTimeout(currentTimeout.current);
@@ -244,7 +244,9 @@ function ListUserTable(): React.ReactNode {
   );
 
   useEffect(() => {
+    //@ts-ignore
     if (data?.pages && data.pages.length > 0) {
+      //@ts-ignore
       const firstPageData = data.pages[0];
       setTotalPages(Math.ceil(firstPageData.total_count / perPage));
     }
@@ -253,13 +255,21 @@ function ListUserTable(): React.ReactNode {
   useEffect(() => {
     // When pageNumber changes, we need to manually trigger fetching the specific page
     // This is a workaround for traditional pagination with useInfiniteQuery
+
     if (data?.pages.length < pageNumber && hasNextPage && !isFetchingNextPage) {
       fetchNextPage({ pageParam: pageNumber });
     }
-  }, [pageNumber, fetchNextPage, hasNextPage, isFetchingNextPage, data]);
+  }, [
+    pageNumber,
+    perPage,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    data,
+  ]);
 
   if (isLoading) {
-    return toast.info("Data Loading !", {
+    toast.info("Data Loading !", {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: true,
@@ -272,7 +282,7 @@ function ListUserTable(): React.ReactNode {
   }
 
   if (isError) {
-    return toast.error(
+    toast.error(
       `Error occurred while data fetching: ${
         error?.message || "Unknown error"
       }`,
@@ -289,7 +299,6 @@ function ListUserTable(): React.ReactNode {
       }
     );
   }
-
   const allUsersAcrossPages =
     data?.pages.flatMap((page) => page.userData) || [];
 
@@ -316,7 +325,7 @@ function ListUserTable(): React.ReactNode {
           onChange={(e) => handleSearchEvent(e)}
         />
       </div>
-      <div className="overflow-y-scroll max-h-[400px]">
+      <div className="overflow-y-scroll max-h-[380px]">
         <table className="min-w-full table-auto">
           <thead className="sticky top-0">
             <tr className="bg-gray-100 text-gray-600">
@@ -366,7 +375,6 @@ function ListUserTable(): React.ReactNode {
           </tbody>
         </table>
       </div>
-
       <PaginationButton
         perPage={perPage}
         setPerPage={(newPerPage) => {
@@ -378,7 +386,6 @@ function ListUserTable(): React.ReactNode {
         pageNumber={pageNumber}
         totalPages={totalPages}
       />
-
       {isModalOpen && selectedUser && (
         <EditUserModal
           user={selectedUser}

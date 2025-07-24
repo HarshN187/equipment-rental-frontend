@@ -28,6 +28,7 @@ export function useGetCustomer(searchQuery: string, perPage: number) {
         limit: perPage,
         query: searchQuery,
       });
+    
       return response.data;
     },
     getNextPageParam: (lastPage, allPages) => {

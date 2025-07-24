@@ -43,7 +43,7 @@ export function EditRentalModal({
     },
   });
 
-  const [userData, setUserData] = useState<DropdownOption[]>([]);
+  const [UserData, setUserData] = useState<DropdownOption[]>([]);
   const [equipData, setEquipData] = useState<DropdownOption[]>([]);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export function EditRentalModal({
               defaultValue={rental.user.user_id}
               register={register}
               valueAsNumber={true}
-              options={userData}
+              options={UserData}
               placeholder="Select a customer"
               error={errors["user"]}
             />

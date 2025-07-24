@@ -22,7 +22,7 @@ function AddRentalForm(): JSX.Element {
     resolver: zodResolver(rentalSchema),
   });
 
-  const [userData, setUserData] = useState<DropdownOption[]>([]);
+  const [UserData, setUserData] = useState<DropdownOption[]>([]);
   const [equipData, setEquipData] = useState<DropdownOption[]>([]);
 
   const createMutation = useCreateRental();
@@ -43,7 +43,7 @@ function AddRentalForm(): JSX.Element {
             name="user"
             register={register}
             valueAsNumber={true}
-            options={userData}
+            options={UserData}
             placeholder="Select a customer"
             error={errors["user"]}
           />

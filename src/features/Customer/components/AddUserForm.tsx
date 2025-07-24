@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema, type UserData } from "../../../types/user.types";
 import { addUserFields } from "../../../constants/formFields";
 import { Input } from "../../../components/Form/Input";
-import { useNavigate } from "react-router-dom";
 import { useAddCustomer } from "../hooks/useAddCustomer";
 import type { JSX } from "react";
 
