@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div> */}
 
-        <RecentActivity></RecentActivity>
+        {/* <RecentActivity></RecentActivity> */}
       </div>
     </>
   );
